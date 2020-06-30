@@ -10,15 +10,6 @@ import sys, getopt, os
 #    by yaonkey/lisovsky611            
 
 
-WELCOME_TEXT = '''
-    ||          ||    =======     ========               
-    ||          ||    ||   //      \\\         |      |  
-    ||          ||    =====          \\\     --+--  --+--
-    ||          ||    ||   \\\          \\\     |      |  
-    ========    ||    =======     ========               
-'''
-print(WELCOME_TEXT)
-
 IP = '127.0.0.1'
 PORT = 23547
 DEFAULT_DIR = {
@@ -27,25 +18,41 @@ DEFAULT_DIR = {
     "mac": "/user/cpp-packs/",
     "etc": "Unsupported platform"
 }
+HELP_TEXT = """
+Usage: packs.py [options] file...
+Options: 
+-h            Get help.
+-s <name>     Search pack by name.
+-i <name>     Install pack to local project.
+-r <name>     Remove pack from local project.
+-d <dir>      Select dir for installing pack.
+"""
 
 def main(argv):
-   inputfile = ''
-   outputfile = ''
+   packname = ''
+   packdir = ''
    try:
-      opts, args = getopt.getopt(argv,"hi:o:",["ifile=","ofile="])
+      opts, args = getopt.getopt(argv, "hs:i:r:d:", ["help","search=","install=", "remove=", "dir="])
    except getopt.GetoptError:
-      print ('test.py -i <inputfile> -o <outputfile>')
+      print ('packs.py --help to get help')
       sys.exit(2)
+
    for opt, arg in opts:
-      if opt == '-h':
-         print ('test.py -i <inputfile> -o <outputfile>')
-         sys.exit()
-      elif opt in ("-i", "--input"):
-         inputfile = arg
-      elif opt in ("-o", "--output"):
-         outputfile = arg
-   print (f'Input file is {inputfile}')
-   print (f'Output file is {outputfile}')
+        if opt in ('-h', '--help'):
+            print (HELP_TEXT)
+            sys.exit()
+        elif opt in ('-s', '--search'):
+            packname = arg
+        elif opt in ('-i', '--install'):
+            packname = arg
+            packdir = DEFAULT_DIR[checkPlatform()]
+        elif opt in ('-r', '--remove'):
+            packname = arg
+        elif opt in ('-d', '--dir'):
+            packdir = arg
+        
+   print (f'[*] Name: {packname}')
+   print (f'[*] Dir: {packdir}')
 
 def checkPlatform():
     """ Check current platform. return str """
