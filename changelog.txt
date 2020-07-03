@@ -1,5 +1,12 @@
-v0.2:
+v0.2-alpha:
     * Added changelog file
     * Deleted welcome text
     * Updated flags
     * Added help text
+v0.3-alpha:
+    * Added flag "-u" to uploading your packs
+    * Added flag "-g" to global installing
+    * Added config file
+    * Changed "repo" to "repo-ip" and "repo-port"
+    * Changed "logo"
+    * Added installer/uninstaller sh-files for linux
