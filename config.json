@@ -1,1 +1,1 @@
-{ "name": "packs-config", "repo-ip": "location.com", "repo-port": 43523, "global-path": "/usr/bin/" }
+{"name": "packs-config", "repo-ip": "location.com", "repo-port": 43523, "global-path": "/usr/bin/cpp-packs/", "local-path": "./"}

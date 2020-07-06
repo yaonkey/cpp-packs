@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import sys, getopt, os, pathlib, json
+import sys, getopt, os, pathlib, json, wget
 
 #    ||=====     //====\\    =======   ||   //   ========               
 #    ||   //     ||    ||   ||         || //      \\         
@@ -90,26 +90,34 @@ def loadConfig():
             "name": "packs-config",
             "repo-ip": "location.com",
             "repo-port": 43523,
-            "global-path": f"{DEFAULT_DIR[checkPlatform()]}"
+            "global-path": f"{DEFAULT_DIR[checkPlatform()]}",
+            "local-path": "./"
         }
         with open("config.json", "w") as config_file:
             json.dump(data, config_file)
+        os.mkdir('libs')
     return data
 
 def searchPack(name: str):
     """ Search packs by name. return bool """
-    pass
+    return True  # change it (todo)
 
 def isLocalExists(name: str):
     """ Check exists in local dir. return bool """
-    return True if os.path.exists(name) else False
+    return True if os.path.exists(f'./libs/{name}') else False
     
 
 def downloadPack(name: str):
     """ If pack is exists => download pack. return bool """
-    if not isLocalExists:
-        pass  # download
+    url = loadConfig()["repo-ip"]
+    if not isLocalExists(name):
+        if searchPack(name):
+            try:
+                wget.download(f'{url}/yaonkey/cpp-packs/master/changelog.txt', f"{loadConfig()['local-path']}libs/{name}")
+            except:
+                pass
     else:
+        print('This pack is exists!')
         return False
 
 def installPack(name: str, location: str):

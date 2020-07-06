@@ -10,3 +10,6 @@ v0.3-alpha:
     * Changed "repo" to "repo-ip" and "repo-port"
     * Changed "logo"
     * Added installer/uninstaller sh-files for linux
+v0.3.1-alpha:
+    * Downloading packs in development
+    * Small bugfixes
